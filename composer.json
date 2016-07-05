@@ -1,0 +1,17 @@
+{
+    "name": "xiaoshu/foundation",
+    "description": "xiaoshu common class",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "qzhang",
+            "email": "qzhang@treevc.com"
+        }
+    ],
+    "autoload": {
+	    "psr-4": {"Xiaoshu\\Foundation\\":"src"}
+    },
+    "require": {
+	    "laravel/framework": "5.2.31"
+    }
+}
