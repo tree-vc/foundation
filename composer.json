@@ -4,8 +4,8 @@
     "license": "MIT",
     "authors": [
         {
-            "name": "qzhang",
-            "email": "qzhang@treevc.com"
+            "name": "treevc",
+            "email": "treevc@treevc.net"
         }
     ],
     "autoload": {
