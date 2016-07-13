@@ -1,7 +1,7 @@
 <?php
 /**
  * Created by PhpStorm.
- * User: aibang
+ * User: qzhang
  * Date: 2016/7/12
  * Time: 11:29
  */
@@ -9,6 +9,7 @@
 namespace Xiaoshu\Foundation\Services;
 
 use DB;
+use Xiaoshu\Foundation\Exceptions\MySQLCounterExistException;
 
 class MySQLCounterService
 {
@@ -17,13 +18,12 @@ class MySQLCounterService
     {
         $count = DB::table(self::TABLE_NAME)->where('name', $name)->count();
         if ($count) {
-            return false;
+            throw new MySQLCounterExistException();
         } else {
             DB::table(self::TABLE_NAME)->insert([
                 'name' => $name,
                 'number' => 0,
             ]);
-            return true;
         }
 
     }
@@ -34,5 +34,15 @@ class MySQLCounterService
         DB::select("update $tableName set number=last_insert_id(number+1) where name='$name';");
         $res = DB::select('select last_insert_id() as id');
         return $res[0]->id;
+    }
+
+    public static function delete($name)
+    {
+        DB::table(self::TABLE_NAME)->where('name', $name)->delete();
+    }
+
+    public static function getValue($name)
+    {
+        return DB::table(self::TABLE_NAME)->where('name', $name)->value('number');
     }
 }
